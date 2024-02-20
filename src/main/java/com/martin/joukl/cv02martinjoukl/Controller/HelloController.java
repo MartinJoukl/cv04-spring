@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 // @RestController je jeho podmožina a slouží pouze pro REST odpovědi - tedy vrací data ve formě API odpovědi - JSON a nebo XML
 // RestController anotace přidává anotaci @Controller a @ResponseBody
 @RestController
-@RequestMapping("/api/v1")
 public class HelloController {
     @GetMapping("")
     public String helloWorld() { return "Hello world from Spring Boot application."; }
