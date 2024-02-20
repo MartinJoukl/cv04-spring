@@ -1,4 +1,4 @@
-package com.martin.joukl.cv02martinjoukl;
+package com.martin.joukl.cv02martinjoukl.Controller;
 
 import jakarta.websocket.server.PathParam;
 import org.springframework.stereotype.Controller;
