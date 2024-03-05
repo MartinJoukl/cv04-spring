@@ -1,12 +1,14 @@
 package com.martin.joukl.cv02martinjoukl.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.sql.Date;
 import java.util.List;
-
 /*
 ddl-auto - hodnoty: create, create-drop, none, update, validate
 
@@ -22,6 +24,9 @@ public class AppUser {
     private int id;
 
     @Column(name = "username")
+    @NotNull
+    @NotBlank
+    @Length(max = 255)
     private String username;
 
     @Column(name = "password")

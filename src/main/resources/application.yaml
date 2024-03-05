@@ -2,6 +2,11 @@ server:
   port: 9000
   servlet:
     context-path: /api/v1
+
+logging:
+  level:
+    org.springframework.security: trace
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -10,3 +15,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
