@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -28,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(AppUserController.class)
 @Import(AppUserController.class)
-@ComponentScan(basePackages = "com.martin.joukl.cv02martinjoukl")
 class AppUserControllerTest {
 
     @Autowired
@@ -37,54 +38,10 @@ class AppUserControllerTest {
     @MockBean
     private AppUserService appUserService;
 
-    //@Autowired
-    //private TokenController tokenController;
 
     private String token;
-    /*
-    @BeforeEach
-    public void login(){
-        token = tokenController.token(new Authentication() {
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return new LinkedList<>();
-            }
-
-            @Override
-            public Object getCredentials() {
-                return new LinkedList<>();
-            }
-
-            @Override
-            public Object getDetails() {
-                return new LinkedList<>();
-            }
-
-            @Override
-            public Object getPrincipal() {
-                return new LinkedList<>();
-            }
-
-            @Override
-            public boolean isAuthenticated() {
-                return true;
-            }
-
-            @Override
-            public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
-            }
-
-            @Override
-            public String getName() {
-                return "user";
-            }
-        });
-    }
-
-     */
-
     @Test
+    @WithMockUser(username = "user", password = "password")
     void getAppUser() throws Exception {
         AppUser expectedAppUser = new AppUser();
         expectedAppUser.setId(50);
@@ -99,7 +56,7 @@ class AppUserControllerTest {
 
         ResultActions action = mockMvc.perform(
                 get("/api/v1/getAppUser")
-                        //.header("authorization", "Bearer " + token)
+                        .header("authorization", "Bearer " + token)
                         .accept(MediaType.APPLICATION_JSON)
                         .param("active", "true")
         ).andExpect(status().isOk());
